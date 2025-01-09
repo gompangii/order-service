@@ -1,0 +1,7 @@
+
+  #8.2.2 스프링 데이터 R2DBC를 사용한 리액티브 데이터 지속성
+  ## 적용오류로 아래 설정 제거(application.yml)
+  flyway:
+    user: ${spring.r2dbc.username}
+    password: ${spring.r2dbc.password}
+    url: jdbc:mariadb://192.168.56.40:3306/polardb_catalog
