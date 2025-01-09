@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Table("orders")
 public record Order (
@@ -20,10 +21,10 @@ public record Order (
   OrderStatus status,
 
   @CreatedDate
-  Instant createdDate,
+  LocalDateTime createdDate,
 
   @LastModifiedDate
-  Instant lastModifiedDate,
+  LocalDateTime lastModifiedDate,
 
   @Version
   int version
