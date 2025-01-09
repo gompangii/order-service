@@ -10,3 +10,11 @@ spring:
     name: order-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
+  r2dbc:
+    username: root
+    password: mariadb
+    url: r2dbc:mariadb://192.168.56.40:3306/polardb_catalog
+    pool:
+      max-create-connection-time: 2s
+      initial-size: 5
+      max-size: 10
