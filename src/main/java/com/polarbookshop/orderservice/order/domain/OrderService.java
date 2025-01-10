@@ -24,7 +24,7 @@ public class OrderService {
   public Mono<Order> submitOrder(String isbn, int quantity) {
     return bookClient.getBookByIsbn(isbn)
       .map(book -> buildAcceptedOrder(book, quantity))
-      .defaultIfEmpty(buildRejecedOrder(isbn, quantity))
+      .defaultIfEmpty(buildRejectedOrder(isbn, quantity))
       .flatMap(orderRepository::save);
     /*
     return Mono.just(buuildRejecedOrder(isbn, quantity))
@@ -36,7 +36,7 @@ public class OrderService {
     return Order.of(book.isbn(), book.title() + " - " + book.author(), book.price(), quantity, OrderStatus.ACCEPTED);
   }
 
-  public static Order buildRejecedOrder(String bookIsbn, int quantity){
+  public static Order buildRejectedOrder(String bookIsbn, int quantity){
     return Order.of(bookIsbn, null, null, quantity, OrderStatus.REJECTED);
   }
 }

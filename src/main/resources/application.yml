@@ -13,6 +13,7 @@ spring:
   r2dbc:
     username: root
     password: mariadb
+    port: 3306
     url: r2dbc:mariadb://192.168.56.40:3306/polardb_order
     pool:
       max-create-connection-time: 2s
