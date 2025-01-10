@@ -37,7 +37,7 @@ public class OrderRepositoryR2dbcTests {
   }
 
   private static String r2dbcUrl() {
-    return String.format("r2dbc:postgresql://%s:%s/%s", mariadb.getHost(),
+    return String.format("r2dbc:mariadb://%s:%s/%s", mariadb.getHost(),
       mariadb.getMappedPort(3306), mariadb.getDatabaseName());
   }
 
