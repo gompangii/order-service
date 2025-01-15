@@ -17,7 +17,7 @@ spec:
       containers:
         - name: order-service
           image: docker.io/gompangii/order-service
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           lifecycle:
             preStop:
               exec:
