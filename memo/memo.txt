@@ -1,22 +1,32 @@
 
-  #8.2 스프링 데이터 R2DBC를 사용한 리액티브 데이터 지속성
-
-  ## 5 플라이웨이를 사용한 데이터베이스 스키마 관리 - 적용오류로 아래 설정 제거(application.yml)
+#8.2 스프링 데이터 R2DBC를 사용한 리액티브 데이터 지속성
+## 5 플라이웨이를 사용한 데이터베이스 스키마 관리 - 적용오류로 아래 설정 제거(application.yml)
   flyway:
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
     url: jdbc:mariadb://192.168.56.40:3306/polardb_catalog
 
-  ## Order 레코드 엔티티 클래서 정의시 DB의 DateTime 이나 TimeStamp 형 일경우,
-  ## 변수형을 Instant 형으로 선언하면 오류 발생 -> LocalDataTime 형으로 선언해야 함
+## Order 레코드 엔티티 클래서 정의시 DB의 DateTime 이나 TimeStamp 형 일경우,
+## 변수형을 Instant 형으로 선언하면 오류 발생 -> LocalDataTime 형으로 선언해야 함
 
-  ## order-service 이미지 빌드후 도커허브에 등록
-   > ./gradlew bootBuildImage --imageName docker.io/gompangii/order-service --publishImage -PregistryUrl=docker.io -PregistryUsername=gompangii -PregistryToken=<도커허브 토큰값>
+## order-service 이미지 빌드후 도커허브에 등록
+ > ./gradlew bootBuildImage --imageName docker.io/gompangii/order-service --publishImage -PregistryUrl=docker.io -PregistryUsername=gompangii -PregistryToken=<도커허브 토큰값>
 
-  #8.2.4 스프링 웹플럭스로 REST API 노출
-   > curl -X POST -H "Content-Type: application/json" -d '{"isbn" : "1234567890", "quantity" : "3"}' http://localhost:9002/orders
+#8.2.4 스프링 웹플럭스로 REST API 노출
+ > curl -X POST -H "Content-Type: application/json" -d '{"isbn" : "1234567890", "quantity" : "3"}' http://localhost:9002/orders
 
-  #8.3.3 웹 클라이언트를 통한 REST 클라이언트 구현
-   > curl -X POST -H "Content-Type: application/json" -d '{"isbn" : "1234567891", "quantity" : "3"}' http://localhost:9002/orders
+#8.3.3 웹 클라이언트를 통한 REST 클라이언트 구현
+ > curl -X POST -H "Content-Type: application/json" -d '{"isbn" : "1234567891", "quantity" : "3"}' http://localhost:9002/orders
 
+#10.5.1 이벤트 소비자 구현 및 멱등성 문제
+## 스프링 클라우드 스트림 및 테스트 바인더 의존성 추가
+### 스프링 부트 '3.4.1'에서는 아래와 같이 추가해야함
+  implementation 'org.springframework.cloud:spring-cloud-stream'
+  testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'
+
+  dependencyManagement {
+   	imports {
+   		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+   	}
+  }
 
