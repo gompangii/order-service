@@ -8,7 +8,7 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.savedrequest.NoOpServerRequestCache;
 
-@EnableWebFluxSecurity
+//@EnableWebFluxSecurity
 @Configuration(proxyBeanMethods = false)
 public class SecurityConfig {
   @Bean
