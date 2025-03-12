@@ -63,19 +63,23 @@ dependencyManagement {
 	}
 }
 
-bootBuildImage {
-	//builder = "docker.io/paketobuildpacks/builder-jammy-base"
-	imageName = "${project.name}"
-	publish = true
-	environment = ["BP_JVM_VERSION": "17"]
+springBoot {
+	buildInfo()
+}
 
-	docker {
-		publishRegistry {
-			username = project.findProperty("registryUsername")
-			password = project.findProperty("registryToken")
-			url = project.findProperty("registryUrl")
-		}
-	}
+bootBuildImage {
+	imageName = "${project.name}"
+	//publish = true
+	environment = ["BP_JVM_VERSION": "17"]
+	createdDate = "now"
+
+//	docker {
+//		publishRegistry {
+//			username = project.findProperty("registryUsername")
+//			password = project.findProperty("registryToken")
+//			url = project.findProperty("registryUrl")
+//		}
+//	}
 }
 
 tasks.named('test') {
