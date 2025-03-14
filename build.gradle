@@ -74,7 +74,7 @@ bootBuildImage {
 	environment = ["BPE_JAVA_OPTS": "-Xms512m -Xmx1024m"]
 	createdDate = "now"
 
-	
+
 //	docker {
 //		publishRegistry {
 //			username = project.findProperty("registryUsername")
