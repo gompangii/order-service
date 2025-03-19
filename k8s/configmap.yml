@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-config
+  labels:
+    app: oder-service
+data:
+  application.yml: |
+    polar:
+      catalog-service-uri: http://catalog-service
+    r2dbc:
+      url: r2dbc:mariadb://192.168.56.40:3306/polardb_order
+    rabbitmq:
+      host: polar-rabbitmq
+    security:
+      oauth2:
+        resourceserver:
+          jwt:
+            issuer-uri: http://192.168.56.30:8080/realms/PolarBookshop
