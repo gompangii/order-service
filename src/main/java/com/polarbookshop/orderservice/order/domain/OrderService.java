@@ -20,15 +20,14 @@ public class OrderService {
   private final OrderRepository orderRepository;
   private final StreamBridge streamBridge;
 
-
   public OrderService(BookClient bookClient, StreamBridge streamBridge, OrderRepository orderRepository) {
     this.bookClient = bookClient;
     this.orderRepository = orderRepository;
     this.streamBridge = streamBridge;
   }
 
-  public Flux<Order> getAllOrders() {
-    return orderRepository.findAll();
+  public Flux<Order> getAllOrders(String userId) {
+    return orderRepository.findAllByCreatedBy(userId);
   }
 
   @Transactional
@@ -38,22 +37,19 @@ public class OrderService {
       .defaultIfEmpty(buildRejectedOrder(isbn, quantity))
       .flatMap(orderRepository::save)
       .doOnNext(this::publishOrderAcceptedEvent);
-    /*
-    return Mono.just(buuildRejecedOrder(isbn, quantity))
-      .flatMap(orderRepository::save);
-     */
   }
 
   public static Order buildAcceptedOrder(Book book, int quantity) {
-    return Order.of(book.isbn(), book.title() + " - " + book.author(), book.price(), quantity, OrderStatus.ACCEPTED);
+    return Order.of(book.isbn(), book.title() + " - " + book.author(),
+      book.price(), quantity, OrderStatus.ACCEPTED);
   }
 
-  public static Order buildRejectedOrder(String bookIsbn, int quantity){
+  public static Order buildRejectedOrder(String bookIsbn, int quantity) {
     return Order.of(bookIsbn, null, null, quantity, OrderStatus.REJECTED);
   }
 
   private void publishOrderAcceptedEvent(Order order) {
-    if(!order.status().equals(OrderStatus.ACCEPTED)) {
+    if (!order.status().equals(OrderStatus.ACCEPTED)) {
       return;
     }
     var orderAcceptedMessage = new OrderAcceptedMessage(order.id());
