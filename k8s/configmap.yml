@@ -16,4 +16,4 @@ data:
       oauth2:
         resourceserver:
           jwt:
-            issuer-uri: http://192.168.56.30:8080/realms/PolarBookshop
+            issuer-uri: http://192.168.56.30:30880/realms/PolarBookshop

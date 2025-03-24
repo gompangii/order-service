@@ -53,11 +53,11 @@ spring:
     username: user
     password: password
     connection-timeout: 5s
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://192.168.56.41:8080/realms/PolarBookshop
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://192.168.56.41:8080/realms/PolarBookshop
 
 logging:
   pattern:
