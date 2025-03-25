@@ -6,9 +6,9 @@ metadata:
     app: oder-service
 data:
   application.yml: |
+    polar:
+      catalog-service-uri: http://catalog-service
     spring:
-      polar:
-        catalog-service-uri: http://catalog-service
       r2dbc:
         url: r2dbc:mariadb://192.168.56.40:3306/polardb_order
       rabbitmq:
