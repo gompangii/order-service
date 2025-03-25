@@ -12,9 +12,9 @@ data:
       r2dbc:
         url: r2dbc:mariadb://192.168.56.40:3306/polardb_order
       rabbitmq:
-        #host: polar-rabbitmq
-        host: 192.168.56.30
-        port: 30567
+        host: polar-rabbitmq
+        #host: 192.168.56.30
+        #port: 30567
       security:
         oauth2:
           resourceserver:
